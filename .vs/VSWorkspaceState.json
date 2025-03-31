@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\api",
+    "\\api\\services",
+    "\\pages",
+    "\\pages\\billing",
+    "\\pages\\clients",
+    "\\pages\\inventory",
+    "\\pages\\tasks",
+    "\\plugins",
+    "\\public"
+  ],
+  "SelectedNode": "\\plugins\\client.ts",
+  "PreviewInSolutionExplorer": false
+}

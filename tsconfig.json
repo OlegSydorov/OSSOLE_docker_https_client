@@ -1,0 +1,13 @@
+{
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "extends": "./.nuxt/tsconfig.json",
+
+  "compilerOptions": {
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/composition-api",
+      "nuxt/dist/pages/runtime/composables"
+    ]
+  },
+  "exclude": [ "node_modules" ]
+}

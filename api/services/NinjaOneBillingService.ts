@@ -45,12 +45,13 @@ export default class NinjaOneBillingService extends ApiServiceBase {
 
     // !!! REQUEST TO NINJAONE !!!
     //Get all organizations with tickets based on the time of interventions 
-    public async getOrganizationsWithTickets(year:String, month:String): Promise<NinjaOneOrganization[]> {
+    public async getOrganizationsWithTickets(year: String, month: String): Promise<NinjaOneOrganization[]> {
 
         //const getNinjaOneOrganizationsWithTicketsUrl = this.baseUrl + this.midNinjaOneUrl + this.getNinjaOneUrl + `organizationsWithTickets/${year}/${month}`;
         //const getNinjaOneOrganizationsWithTicketsUrl = this.midNinjaOneUrl + this.getNinjaOneUrl + `organizationsWithTickets/${year}/${month}`;
         //const getNinjaOneOrganizationsWithTicketsUrl = '/organization' + this.getNinjaOneUrl + `organizations/${year}/${month}`;
-       const getNinjaOneOrganizationsWithTicketsUrl = `/list/get/list/period=${year}${month}`;
+        //const getNinjaOneOrganizationsWithTicketsUrl = '/organization/get/organizations';
+        const getNinjaOneOrganizationsWithTicketsUrl = `/list/get/list/period=${year}${month}`;
         console.log("Get all organizations with tickets", getNinjaOneOrganizationsWithTicketsUrl);
 
         try {
@@ -362,15 +363,15 @@ export default class NinjaOneBillingService extends ApiServiceBase {
         ID: number,
         CreateTime: number,
         Description: string,
-        Month: number,
-        Year: number,
+        Month: string,
+        Year: string,
         UserId: number,
         IsInvoiced: number,
         TimeTracked: number,
         TicketId: number,
         TicketCode: string): Promise<Message> {
 
-        console.log("Data received in the addIntervention", ID,CreateTime,Description,Month,Year,UserId,IsInvoiced,TimeTracked,TicketId, TicketCode);
+        console.log("NinjaOneBillingService executing CREATE_INTERVENTION method: data received: ", ID,CreateTime,Description,Month,Year,UserId,IsInvoiced,TimeTracked,TicketId, TicketCode);
 
         //const addInterventionUrl = `${this.baseUrl}${this.midMySqlUrl}${this.addMySqlUrl}intervention/`;
         const addInterventionUrl = `${this.midMySqlUrl}${this.addMySqlUrl}intervention/`;
@@ -385,8 +386,8 @@ export default class NinjaOneBillingService extends ApiServiceBase {
                         ID: ID,
                         CreateTime: CreateTime.toString(),
                         Description: Description,
-                        Month: Month,
-                        Year: Year,
+                        Month: Number(Month),
+                        Year: Number(Year),
                         UserId: UserId,
                         IsInvoiced: IsInvoiced,
                         TimeTracked: TimeTracked,
@@ -427,15 +428,15 @@ export default class NinjaOneBillingService extends ApiServiceBase {
         ID: number,
         CreateTime: number,
         Description: string,
-        Month: number,
-        Year: number,
+        Month: string,
+        Year: string,
         UserId: number,
         IsInvoiced: number,
         TimeTracked: number,
         TicketId: number,
         TicketCode: string): Promise<Message> {
 
-        console.log("Data received in the UPDATE INTERVENTION", ID, CreateTime, Description, Month, Year, UserId, IsInvoiced, TimeTracked, TicketId, TicketCode);
+        console.log("NinjaOneBillingService executing UPDATE_INTERVENTION method: Data received: ", ID, CreateTime, Description, Month, Year, UserId, IsInvoiced, TimeTracked, TicketId, TicketCode);
 
         //const updateInterventionUrl = `${this.baseUrl}${this.midMySqlUrl}${this.updateMySqlUrl}intervention/`;
         const updateInterventionUrl = `${this.midMySqlUrl}${this.updateMySqlUrl}intervention/`;
@@ -450,8 +451,8 @@ export default class NinjaOneBillingService extends ApiServiceBase {
                         ID: ID,
                         CreateTime: CreateTime.toString(),
                         Description: Description,
-                        Month: Month,
-                        Year: Year,
+                        Month: Number(Month),
+                        Year: Number(Year),
                         UserId: UserId,
                         IsInvoiced: IsInvoiced,
                         TimeTracked: TimeTracked,

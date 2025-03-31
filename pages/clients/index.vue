@@ -180,7 +180,7 @@
 
     .content {
         overflow: hidden;
-        height: calc(100vh - 150px);
+        height: 80vh;
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -198,7 +198,7 @@
     }
 
     .entity-listview {
-        height: calc(100vh - 280px);
+        height: 100%;
         overflow-x: hidden;
     }
 

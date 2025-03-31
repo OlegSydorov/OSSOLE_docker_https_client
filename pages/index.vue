@@ -36,7 +36,7 @@
     }
 </script>
 <template>
-    <div class="w-100 h-100 flex-r a-center j-center p-10 bg-b10">
+    <div class="w-100 h-80vh flex-r a-center j-center p-10 bg-b10">
         <br />
         <div class="start-container">
             <div class="logo-grid-item-1">

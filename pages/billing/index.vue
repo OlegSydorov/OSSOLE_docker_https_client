@@ -83,6 +83,8 @@
     async function refreshOrganizations() {
         onHold.value = true;
         var tempData = await api.invoice.getOrganizationsWithTickets((currYear.value).toString(), (currMonthOrd.value + 1).toString());
+       // console.log("MOUNTED organizations", tempData.organizations);
+       // organizations.value = tempData.organizations;
         console.log("MOUNTED organizations", tempData.organizations);
         organizations.value = tempData.organizations;
         onHold.value = false;
@@ -492,7 +494,7 @@
         if (invoicedOnlyCopy)
         {
             stringRes = stringRes + hoursPercentageConverter(Number(item[hrsInv.value as mapT])) + "\n";
-            stringRes += "=========================================================================================================================== \n";
+            //stringRes += "=========================================================================================================================== \n";
             console.log(stringRes, item[hrsInv.value as mapT]);
             for (let ticket of (item[itemArr.value as mapT]) as NinjaOneTicket[]) {
                 console.log("TICKET: ", ticket);
@@ -501,7 +503,7 @@
                     for (let intervention of ticket.Interventions) {
                         if (intervention.IsInvoiced) {
                             console.log("invoiced INTERVENTION: ", intervention);
-                            stringRes += "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
+                            //stringRes += "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
                             stringRes += intervention.Description + "\n";
                         }
                     }
@@ -512,7 +514,7 @@
         else
         {
             stringRes = stringRes + hoursPercentageConverter(Number(item[hrs.value as mapT]) - Number(item[hrsInv.value as mapT])) + "\n";
-            stringRes += "========================================================================================================================= \n";
+            //stringRes += "========================================================================================================================= \n";
             for (let ticket of (item[itemArr.value as mapT]) as NinjaOneTicket[]) 
             {
                 if (ticket.TotalTimeTracked > ticket.TotalTimeInvoiced)
@@ -525,7 +527,7 @@
                         if (!intervention.IsInvoiced)
                         {
                             console.log("non-invoiced INTERVENTION: ", intervention);
-                            stringRes += "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
+                            //stringRes += "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
                             stringRes += intervention.Description + "\n";
                         }
                     }
@@ -962,7 +964,9 @@
                     <CustomListView ref="listView" v-model="selectedOrganization" :items="filteredOrganizations" :allow-selection="true"
                                     :show-details="true" :allow-deselection="false" class="entity-listview">
                         <template v-slot:organizationItem="{ item }">
-                            <div class="mb-2 flex-c a-stretch br-5 bg-t" @click="gridItemClick(item)">
+                            <div class="mb-2 flex-c a-stretch br-5 bg-t" 
+                                 :class="{'bg-invoice-complete':item[hrs]==item[hrsInv]}"
+                                 @click="gridItemClick(item)">
                                 <div v-if="item.OnContract" class="ta-center c-cloud-contract p-2 task-detail-item ">
                                     {{ item.Name }}
                                     <span class="tooltiptext-r-close">Entité: {{item.Name }} <br> AVEC CONTRAT</span>
@@ -1106,7 +1110,8 @@
                 <div class="t-container w-100 bg-t flex-c a-top j-stretch">
                     <div class="flex-c a-top w-100 j-center bg-t" v-for="item in filteredOrganizations" :key="item.ID">
 
-                        <div class="flex-r a-stretch j-stretch w-100">
+                        <div class="flex-r a-stretch j-stretch w-100"
+                              :class="{'bg-invoice-complete':item[hrs]==item[hrsInv]}">
                             <div class="f-6 list-line flex-r j-stretch a-stretch" @click="tableItemClick(item, item.ID)">
                                 <div v-if="item.OnContract" class="f-2 ta-center c-cloud-contract p-2 task-detail-item ">
                                     {{ item.Name }}
@@ -1265,7 +1270,7 @@
     }
     .content {
         overflow: hidden;
-        height: calc(100vh - 150px);
+        height: 80vh;
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -1280,7 +1285,7 @@
         flex-shrink: 0;
     }
     .entity-listview {
-        height: calc(100vh - 280px);
+        height: 100%;
         overflow-x: hidden;
     }
         .entity-listview::-webkit-scrollbar {
